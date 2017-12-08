@@ -1,0 +1,41 @@
+{% extends 'home.html' %}
+
+{% block content %}
+    <div class="main-title">
+        <button class="btn btn-sm btn-primary disabled" type="button">
+            {{ type_category_obj }} &nbsp;&nbsp;<span class="badge">{{ articles.count }}</span>
+        </button>
+    {% if not articles.count %}
+        <div class="col-md-12 text-center no-articles">
+            <p>小主~这个栏目下暂时还没有内容昂~你可以去其他栏目下浏览文章</p>
+        </div>
+    {% endif %}
+        {% for article in articles %}
+            <div class="col-md-12" style="margin-top: 30px">
+                <p>
+                    <a href="{% url 'article' username=article.blog.user.username article_id=article.id %}">{{ article.title }}</a>
+                </p>
+                <div class="media">
+                    <div class="media-left">
+                        <a href="{% url 'blog_url' username=article.blog.user.username %}">
+                            <img class="media-object" src="/media/{{ article.blog.user.avatar }}" alt="" title="用户头像"
+                                 style="width: 40px; height: 40px">
+                        </a>
+                    </div>
+                    <div class="media-body">
+
+                        {{ article.summary|truncatechars:128 }}
+                    </div>
+                </div>
+                <div class="article-bottom">
+                    <a href="{% url 'blog_url' username=article.blog.user.username %}">{{ article.blog.user.nick_name }}</a>发表于
+                    <span id="create_time">{{ article.create_time|date:"Y-m-d H:i:s" }}</span>
+                    <a href=""><i class="fa fa-commenting" aria-hidden="true"></i>({{ article.comment_count }})</a>
+                    <a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>({{ article.up_count }})</a>
+                </div>
+                <hr>
+            </div>
+
+        {% endfor %}
+    </div>
+{% endblock content %}

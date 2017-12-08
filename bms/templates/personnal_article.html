@@ -1,0 +1,113 @@
+{% extends 'personnal_site.html' %}
+
+{% block content %}
+    <!-- 隐藏input存放获取评论内容路径，用于Ajax -->
+    <input type="hidden" id="load_comments_url" value="{% url 'load_comments' article_id=article.id %}">
+    <!-- 文章内容区域 -->
+    <div class="col-md-12">
+        <span id="back_to_top"></span>
+        <h2>{{ article.title }}</h2>
+        <hr>
+        <p>{{ article.article_detail.content|safe }}</p>
+        <hr>
+    </div>
+    <div class="col-md-12">
+        <!-- 文章评论区域 -->
+        <p id="comment_area">评论区</p>
+        <div id="event_father">
+            <!-- 存放每一条评论的相关信息，包括：根评论id，根评论用户id，跟评论用户行姓名，当前用户姓名 -->
+            <input type="hidden" id="current_user" name="{{ request.session.username }}"
+                   user_id="{{ request.session.id }}" avatar="{{ request.session.avatar_url }}">
+
+            {% for comment in article.comment_set.all %}
+
+                <!-- 每条评论内容 -->
+{#                <div class="col-md-12" id="per_comment" root_comment_user_id="{{ comment.user.id }}">#}
+{#                    <div>#}
+{#                        <img src="{{ comment.user.avatar.url }}" alt="" width="28px" height="28px">#}
+{#                        <span>{{ comment.user }}</span>#}
+{#                        <span class="comment_info">&nbsp;&nbsp;发表于{{ comment.create_time|date:"Y-m-d H:i:s" }}</span>#}
+{#                        <span class="comment_info">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+{#                               <a href="">支持<i class="fa fa-thumbs-up"#}
+{#                                               aria-hidden="true"></i>({{ comment.up_count }})</a>#}
+{#                        &nbsp;&nbsp;#}
+{#                               <a href="">反对<i class="fa fa-thumbs-down"#}
+{#                                               aria-hidden="true"></i>({{ comment.down_count }})</a>#}
+{#                         </span>#}
+{#                        <span class="pull-right">#}
+{#                            <a class="reply" href="#hidden_reply" style="color: #31b0d5;">回复</a>#}
+{#                            <input type="hidden" root_comment_id="{{ comment.id }}"#}
+{#                                   root_comment_user_id="{{ comment.user.id }}"#}
+{#                                   root_comment_username="{{ comment.user.username }}"#}
+{#                                   current_user="{{ request.session.id }}">#}
+{#                     </span>#}
+{#                    </div>#}
+{#                    <p>{{ comment.content }}</p>#}
+{#                </div>#}
+
+            {% empty %}
+                <!-- 如果没有任何评论，显示下面信息 -->
+                <p id="no_comment">该文章还没有任何评论</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="comment_tree"></div>
+{% endblock %}
+
+
+{% block other_content %}
+
+    <!-- 文章点赞区域 -->
+    <div class="like_article">
+        <p>
+            <a href="#" name="up">
+                <span>点个赞</span>&nbsp;&nbsp;&nbsp;
+                <i class="fa fa-thumbs-up  fa-2x"
+                   aria-hidden="true"></i>(<span class="article_up_count">{{ article.up_count }}</span>)
+            </a>
+        </p>
+        <p><a href="#" name="down"><span>不喜欢</span>&nbsp;&nbsp;&nbsp;<i class="fa  fa-thumbs-down fa-2x"
+                                                                        aria-hidden="true"></i>(<span
+                class="article_down_count">{{ article.down_count }}</span>)</a>
+        </p>
+    </div>
+
+    <!-- 存放js代码中需要调用的路径信息及csrfmiddleware数据 -->
+    {% csrf_token %}
+    <input type="hidden" id="article_up"
+           value="{% url 'updown' username=request.session.username option='up' article_id=article.id %}">
+    <input type="hidden" id="article_down"
+           value="{% url 'updown' username=request.session.username option='down' article_id=article.id %}">
+    <hr>
+
+    <!-- 登陆用户评论区域 -->
+        <form>
+            <!-- 评论表单 -->
+            <div id="hidden_reply" class="hides">
+            </div>
+            <textarea name="comment" id="current_user_comment" cols="10" rows="5" placeholder="最多512字节哦"
+                      class="form-control"></textarea>
+            <!-- 存放提交对应评论的路径 -->
+            <input type="hidden" id="pull_comment_url" value="{% url 'pull_comment' username=user.username article_id=article.id %}">
+        </form>
+        <button class="btn btn-default btn-sm" id="submit_comment">提交评论</button>
+        &nbsp;&nbsp;&nbsp;
+        <img src="{{ request.session.avatar_url }}" alt="" width="28px" height="28px" id="user_avatar">
+        <span id="user_name">{{ request.session.username }}</span>
+    <!-- BootStrap警告信息插件 -->
+    <div class="alert alert-danger alert-dismissible hides" id="no_comment_alert" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <strong>天呐!</strong> 评论不能为空昂
+    </div>
+
+    <!-- 用户未登陆 -->
+    {% if not request.session.username %}
+        <div class="current_user_comment">
+            <p>登陆后可以发表评论哦</p>
+        </div>
+    {% endif %}
+
+
+{% endblock %}

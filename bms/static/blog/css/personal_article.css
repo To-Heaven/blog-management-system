@@ -1,0 +1,83 @@
+
+.hides{
+    display: none;
+}
+
+.like_article{
+    margin-top: 100px;
+}
+
+.like_article .fa-thumbs-up{
+    color: #5bc0de;
+}
+
+#reply{
+    color: #2b669a;
+    text-decoration: wavy;
+}
+.like_article .fa-thumbs-down{
+    color: #adadad;
+
+}
+
+.like_article span{
+    font-size: 15px;
+    font-weight: 700;
+    color: #666;
+}
+
+.like_article a{
+    text-decoration: none;
+}
+
+#per_comment span{
+    color: #666;
+    font-size: 15px;
+    font-weight: bold;
+
+}
+
+#per_comment{
+    /*border: 1px dashed gainsboro;*/
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 0;
+}
+
+#comment_area{
+    color: #666;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.no_comment_alert{
+    margin-top: 10px;
+}
+
+#per_comment span.comment_info{
+    color: #adadad;
+    font-size: 10px;
+}
+
+#per_comment p{
+    margin-left: 50px;
+    color: #761c19;
+    font-weight: bolder;
+}
+
+#per_comment:last-child{
+    display: block;
+}
+
+#per_comment span a{
+    color: #adadad;
+    text-decoration: none;
+}
+
+#hidden_reply{
+    color: red;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+

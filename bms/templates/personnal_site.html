@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+{% load tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.nick_name }}</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/limonte-sweetalert2/7.0.3/sweetalert2.css">
+    <link rel="stylesheet" href="/static/css/personal_site.css">
+    <link rel="stylesheet" href="/static/css/personal_article.css">
+    <link rel="stylesheet" href="/static/css/home.css">
+</head>
+<body>
+
+
+<nav class="navbar" style="border-radius: 0">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ user.blog.user_site }}">{{ user.blog.blog_title }}</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/home/">返回首页 <span class="sr-only">(current)</span></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.session.username %}
+                    <li><a href="{% url 'blog_url' username=request.session.username %}"><i class="fa fa-user-circle"
+                                                                                            aria-hidden="true"></i>&nbsp;&nbsp;{{ request.session.username }}
+                    </a></li>
+                {% else %}
+                    <li><a href="/login/">登陆</a></li>
+                    <li><a href="/register/">注册</a></li>
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container-fluid" style="margin-left: 10px">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="row session-style">
+                <div class="info-title-style">
+                    <i class="fa fa-id-card" aria-hidden="true"></i>
+                    <span>&nbsp;博主个人信息</span>
+                    <hr>
+                </div>
+                <ul style="list-style: none" class="info-content-style">
+                    <img src="{{ user.avatar.url }}" alt="" width="60px" height="60px">
+                    <li>昵称： {{ user.nick_name }}</li>
+                    <li>blog年龄： {{ user.join_time|blog_age }}</li>
+                    <li>粉丝： <a href=""></a></li>
+                    <li>关注：</li>
+                    <li><a href="">加关注</a></li>
+                </ul>
+            </div>
+            <div class="row session-style">
+                <div class="info-title-style">
+                    <i class="fa fa-tags" aria-hidden="true"></i>
+                    <span>&nbsp;文章标签</span>
+                    <hr>
+                </div>
+                <ul style="list-style: none">
+                    {% for tag in tags %}
+                        <li><a
+                                href="{% url 'archive' username=user.username para='tag' para_content=tag.2 %}">{{ tag.0 }}({{ tag.1 }})</a>
+                        </li>
+                    {% empty %}
+                        <li class="info-content-style">博主还没有tags昂</li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+            <div class="row session-style">
+                <div class="info-title-style">
+                    <i class="fa fa-list-ul" aria-hidden="true"></i>
+                    <span>&nbsp;文章分类</span>
+                    <hr>
+                </div>
+                <ul>
+                    {% for category in categorys %}
+                        <li style="list-style: none"><a
+                                href="{% url 'archive' username=user.username para='category' para_content=category.2 %}">{{ category.0 }}({{ category.1 }})</a>
+                        </li>
+                    {% empty %}
+                        <li class="info-content-style">博主还没有categorys昂</li>
+
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="row session-style">
+                <div class="info-title-style">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    <span>&nbsp;按时间归档</span>
+                    <hr>
+                </div>
+                <ul>
+                    {% for date in dates %}
+                        <li style="list-style: none"><a
+                                href="{% url 'archive' username=user.username para='date' para_content=date.0 %}">{{ date.0 }}({{ date.1 }})</a>
+                        </li>
+                    {% empty %}
+                        <li class="info-content-style">博主还没有文章昂</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row content-style">
+                <div class="col-md-10 col-md-offset-1">
+                    {% block content %}
+                        {% for article in articles %}
+                            <div class="article">
+                                <p class="title-style">{{ article.title }}</p>
+
+                                <div class="summary">
+                                    <span><strong>摘要：</strong></span><span>{{ article.summary|truncatechars:256 }}</span>
+                                    <a href="{% url 'article' username=user.username article_id=article.id %}"> <span
+                                            style="border-bottom: 1px dashed cornflowerblue">阅读全文</span> </a></div>
+                                <div class="article-info pull-right">
+                                    <span>posted&nbsp;&nbsp;
+                                        {{ article.create_time|date:"Y-m-d H:i" }}&nbsp;&nbsp; {{ user.nick_name }}&nbsp;&nbsp;阅读({{ article.read_count }})&nbsp;&nbsp;评论({{ article.comment_count }})
+                                    </span>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    {% endblock content %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 other_content">
+            {% block other_content %}
+                其他功能待补充区域
+            {% endblock %}
+        </div>
+    </div>
+</div>
+<!-- 存放当前登陆用户的信登陆信息 -->
+<input type="hidden" id="request_user" user_id="{{ request.session.id }}" value="{{ request.session.username }}">
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/limonte-sweetalert2/7.0.3/sweetalert2.all.min.js"></script>
+<script src="/static/js/personal_article.js"></script>
+</body>
+</html>

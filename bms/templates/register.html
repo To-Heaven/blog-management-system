@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册——cms</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/register.css">
+</head>
+<body>
+<div class="outer_canvas">
+    <canvas id="c"></canvas>
+</div>
+<nav class="navbar navbar-default  border-style ">
+    <div class="container my-navbar-style ">
+        <!-- 导航条  -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand font-style" href="#">blog management system</a>
+        </div>
+
+        <!-- 导航条链接 -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" class="font-style">Link</a></li>
+                <li><a href="#" class="font-style">Link</a></li>
+                <li><a href="#" class="font-style">Link</a></li>
+                <li><a href="#" class="font-style">Link</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <p class="title-font">注册新用户</p>
+            <hr>
+        </div>
+    </div>
+    <div class="row row-style">
+        <div class="col-md-7">
+            <form class="form-horizontal" novalidate>
+                {% csrf_token %}
+
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="avatar" class="col-sm-4 control-label ">选择头像</label>
+                        <div class="col-sm-8" id="father_avatar">
+                            <img src="/media/avatar/default.png" id="img_avatar">
+                            <input type="file" value="选择头像" id="file_avatar">
+                            <span id="avatar" class="help-block my-display"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="id_email" class="col-sm-4 control-label text-justify">邮箱</label>
+                        <div class="col-sm-8">
+                            {{ form.email }}
+                            <!-- 显示错误信息  -->
+                            <span id="email" class="help-block my-display"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="id_telephone" class="col-sm-4 control-label text-justify">手机号码</label>
+                        <div class="col-sm-8">
+                            {{ form.telephone }}
+                            <span id="telephone" class="help-block my-display"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="id_username" class="col-sm-4 control-label text-justify">登陆名称</label>
+                        <div class="col-sm-8">
+                            {{ form.username }}
+                            <span id="username" class="help-block my-display"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="id_nick_name" class="col-sm-4 control-label text-justify">显示名称</label>
+                        <div class="col-sm-8">
+                            {{ form.nick_name }}
+                            <span id="nick_name" class="help-block my-display"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="id_password" class="col-sm-4 control-label text-justify">密码</label>
+                        <div class="col-sm-8">
+                            {{ form.password }}
+                            <span id="password" class="help-block my-display"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="id_confirm_password" class="col-sm-4 control-label text-justify">确认密码</label>
+                        <div class="col-sm-8">
+                            {{ form.confirm_password }}
+                            <span id="confirm_password" class="help-block my-display"></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="col-md-10">
+                <div class="col-md-8">
+                    <button class="btn btn-primary col-md-offset-11">注册</button>
+                </div>
+            </div>
+            <div class="col-md-7 col-md-offset-3 ">
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;* “注册” 按钮，即表示您同意并愿意遵守</span><a href=""
+                                                                             style="text-decoration-line: underline">&nbsp;用户协议</a>
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <img src="https://account.cnblogs.com/images/registersideimg.png?v=SuVn_GWSEJByGrNm06GT-sxx_RW9nUtfd625myn_CsE"
+                 class="img-style" alt="">
+        </div>
+    </div>
+    <div class="row text-center">
+        <hr>
+        <a href="">关于blog management system&nbsp;&nbsp;&nbsp;</a>
+        <a href="">联系我们 &nbsp;&nbsp;&nbsp;</a>
+        <span>©2015-2017 &nbsp;&nbsp;&nbsp;</span>
+        <a href="">blog management system&nbsp;&nbsp;&nbsp;</a>
+        <span>保留所有权利&nbsp;Powered&nbsp;by&nbsp;Django&nbsp;Core&nbsp;on&nbsp;小霸王</span>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/static/js/register.js"></script>
+</body>
+</html>

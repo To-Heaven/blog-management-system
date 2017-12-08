@@ -1,0 +1,16 @@
+<ul class="list-unstyled">
+    {% for type in types %}
+        <div id="per_topic">
+            <li class="topic-style text-center">
+                <span class="btn">{{ type.name }}</span>
+            </li>
+            <div class="menu-item hides">
+                {% for type_category in type.typecategory_set.all %}
+                    <a href="{% url 'category' type_category=type_category.id %}">{{ type_category.name }}&nbsp;<span
+                            class="badge">{{ type_category.today_article_count }}</span></a>&nbsp;&nbsp;
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</ul>
+

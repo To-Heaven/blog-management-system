@@ -1,0 +1,109 @@
+.hides {
+    display: none;
+}
+
+#order_article {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+}
+
+.navbar {
+    background: linear-gradient(to bottom, #086ed5, #055db5);
+    border-bottom: 1px solid #044e97;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+    text-decoration: none;
+    background-color: #086ed5;
+    color: white;
+}
+
+a.navbar-brand {
+    color: white;
+}
+
+.navbar-brand:focus, .navbar-brand:hover {
+    text-decoration: none;
+    background-color: #086ed5;
+    color: white;
+}
+
+.topic-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #666;
+}
+
+.main-title p {
+    font-size: 14px;
+    font-weight: 700;
+    color: #666;
+}
+
+.no-articles p {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #666;
+}
+
+.nav .open > a, .nav .open > a:focus, .nav .open > a:hover {
+    background-color: #086ed5;
+    border-color: #337ab7;
+}
+
+.topic-style span {
+    display: block;
+    padding: 0 10px;
+    border-radius: 30px;
+    text-decoration: none;
+    border: 1px solid #daecf5;
+    line-height: 30px;
+    width: 100px;
+    height: 30px;
+    margin-top: 10px;
+}
+
+.topic-style:hover span, .topic-style.current span {
+    background: #259;
+    border-color: #259;
+    color: #fff;
+}
+
+.menu-item {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 10px 0;
+    border-radius: 4px;
+    background: white;
+    text-align: center;
+}
+
+.article-bottom {
+    margin-top: 10px;
+    color: #adadad;
+}
+
+.main-category-style {
+    display: inline-block;
+    background-color: #086ed5;
+    color: white;
+    border-radius: 5px;
+}
+
+.article-info {
+    color: #adadad;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+#is_submit{
+    margin-top: 8px;
+}

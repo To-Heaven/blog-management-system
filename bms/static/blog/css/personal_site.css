@@ -1,0 +1,59 @@
+.title-style {
+    color: #086ed5;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+p.content-style {
+    margin-bottom: -10px;
+}
+
+.info-title-style span {
+    font-size: 17px;
+    font-weight: 700;
+    color: #666;
+}
+
+.info-content-style {
+    font-size: 13px;
+    font-weight: bold;
+    color: #023a66;
+}
+
+.session-style {
+    margin-bottom: 15px;
+}
+
+.current_user_comment p {
+    font-size: 13px;
+    font-weight: 700;
+    color: darkred;
+    margin-top: 20px;
+}
+
+#submit_comment{
+    margin-top: 10px;
+    color: #666;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+#user_avatar{
+    margin-top: 7px;
+}
+
+#user_name{
+    margin-top: 20px;
+    color: #666;
+    line-height: 28px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+
+.article{
+    margin-top: 30px;
+    width: 100%;
+    border-bottom: 1px solid whitesmoke;
+    padding-bottom: 35px;
+}

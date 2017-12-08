@@ -1,0 +1,96 @@
+#father_avatar{
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+
+#img_avatar, #file_avatar{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 15px;
+}
+
+#file_avatar{
+    opacity: 0;
+}
+
+
+
+.help-block {
+    font-size: 10px;
+}
+
+.navbar-nav {
+    float: left;
+    margin: 0
+}
+
+.navbar-nav > li {
+    float: left
+}
+
+.col-md-10 {
+    height: 60px;
+}
+
+.col-md-7 {
+    margin-top: 15px;
+}
+
+.col-md-5 {
+    margin-top: 15px;
+}
+
+.navbar-nav > li > a {
+    padding-top: 15px;
+}
+
+.font-style {
+    color: white;
+}
+
+.title-font {
+    font-size: 25px;
+    margin-top: 30px;
+}
+
+.border-style {
+    border-radius: 0;
+    border: 0;
+}
+
+.row-style {
+    margin-top: 30px;
+}
+
+.img-style {
+    margin-left: -20px;
+    height: 320px;
+    width: 300px;
+}
+
+.form-style {
+    border-right: 1px;
+    border-color: black;
+    border-right: 165px;
+}
+
+.my-display {
+    display: block;
+}
+
+/*---- 页面动态背景 ----*/
+canvas {
+	display:block;
+    opacity: 0.1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.outer_canvas{
+    position: relative;
+}
